@@ -83,7 +83,7 @@ const GiftCouponCard = () => {
 
 			{coupon && (
 				<div className='mt-4'>
-					<h3 className='text-lg font-medium text-gray-300'>Your Available Coupon:</h3>
+					<h3 className='text-lg font-medium text-gray-500'>Your Available Coupon:</h3>
 					<p className='mt-2 text-sm text-gray-400'>
 						{coupon.code} - {coupon.discountPercentage}% off
 					</p>

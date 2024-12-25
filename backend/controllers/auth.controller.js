@@ -135,24 +135,33 @@ export const refreshToken = async (req, res) => {
 	}
 };
 
-// export const getProfile = async (req, res) => {
-// 	try {
-// 		res.json(req.user);
-// 	} catch (error) {
-// 		res.status(500).json({ message: "Server error", error: error.message });
-// 	}
-// };
 export const getProfile = async (req, res) => {
 	try {
-		res.json({
-			_id: req.user._id,
-			name: req.user.name,
-			email: req.user.email,
-			phone: req.user.phone, // Nếu có thêm trường phone
-			role: req.user.role,
-			createdAt: req.user.createdAt,
-		});
+		res.json(req.user);
 	} catch (error) {
 		res.status(500).json({ message: "Server error", error: error.message });
 	}
 };
+
+export const updateUser = async (req, res) => {
+	const userId = req.user.id; // Lấy ID người dùng từ token
+	const { name, email } = req.body;
+
+	try {
+		const user = await User.findByIdAndUpdate(
+			userId,
+			{ name, email },
+			{ new: true, runValidators: true }
+		);
+
+		if (!user) {
+			return res.status(404).json({ message: "Người dùng không tồn tại" });
+		}
+
+		res.status(200).json(user);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ message: "Có lỗi xảy ra khi cập nhật thông tin!" });
+	}
+};
+

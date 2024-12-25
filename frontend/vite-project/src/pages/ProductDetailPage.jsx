@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useProductStore } from "../stores/useProductStore";
 import { useCartStore } from "../stores/useCartStore";
 import { useUserStore } from "../stores/useUserStore";
+import Reviews from "../components/Review";
 import PeopleAlsoBought from "../components/PeopleAlsoBought"; // Import Component
 import toast from "react-hot-toast";
 
@@ -126,6 +127,7 @@ const ProductDetailPage = () => {
             <li>SKU: {product.sku || "N/A"}</li>
           </ul>
         </motion.div>
+        <Reviews productId={productId} />
 
         {/* People Also Bought */}
         <PeopleAlsoBought />

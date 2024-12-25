@@ -19,13 +19,6 @@ const userSchema = new mongoose.Schema(
 			required: [true, "Password is required"],
 			minlength: [6, "Password must be at least 6 characters long"],
 		},
-		phone: {
-			type: String,
-			required: [true, "Phone number is required"],
-			unique: true, // Ensure phone number is unique
-			trim: true,
-			match: [/^\d{10,15}$/, "Please enter a valid phone number"], // Validate format
-		},
 		cartItems: [
 			{
 				quantity: {

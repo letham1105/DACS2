@@ -31,6 +31,12 @@ const orderSchema = new mongoose.Schema(
 			required: true,
 			min: 0,
 		},
+
+		customerEmail: { // Trường email của khách hàng
+			type: String,
+			required: true,
+		  },
+		  
 		stripeSessionId: {
 			type: String,
 			unique: true,

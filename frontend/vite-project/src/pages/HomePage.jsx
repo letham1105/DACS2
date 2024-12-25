@@ -4,7 +4,8 @@ import CategoryItem from "../components/CategoryItem";
 import { useProductStore } from "../stores/useProductStore";
 import FeaturedProducts from "../components/FeaturedProducts";
 
-import banner from "../minidemo.png";
+// import banner from "../minidemo.png";
+import bannervideo from "../bannerLyn.mp4";
 
 const categories = [
 	{ href: "/jeans", name: "Jeans", imageUrl: "dist/jean.jpg" },
@@ -26,8 +27,24 @@ const HomePage = () => {
 	return (
 		<div className='relative min-h-screen text-white overflow-hidden'>
 			{/* Banner với ảnh duy nhất không có lớp phủ */}
-			<div className="h-96 bg-cover bg-center" style={{ backgroundImage: `url(${banner})` }}>
-			</div>
+			{/* <div className="h-96 bg-cover bg-center" style={{ backgroundImage: `url(${banner})` }}>
+			</div> */}
+	         {/* Video banner dài hơn */}
+			<div className="relative h-[60vh] sm:h-[100vh] lg:h-[89vh] overflow-hidden " >
+				<video
+					className="absolute top-0 left-0 w-full h-full object-cover"
+					autoPlay
+					loop
+					muted
+					playsInline
+				>
+					<source src={bannervideo} type="video/mp4" />
+					{/* Fallback cho trình duyệt không hỗ trợ */}
+					Your browser does not support the video tag.
+				</video>
+				
+			</div> 
+			
 			<div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16'>
 				<h1 className='text-center text-5xl sm:text-6xl font-bold text-black mb-4'>
 					Explore Our Categories

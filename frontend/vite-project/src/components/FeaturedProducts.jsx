@@ -49,17 +49,17 @@ const FeaturedProducts = ({ featuredProducts }) => {
 											<img
 												src={product.image}
 												alt={product.name}
-												className='w-full h-48 object-cover transition-transform duration-300 ease-in-out hover:scale-110'
+												className='w-full h-64 object-cover transition-transform duration-300 ease-in-out hover:scale-110'
 											/>
 										</div>
 										<div className='p-4'>
 											<h3 className='text-lg font-semibold mb-2 text-black'>{product.name}</h3>
-											<p className='text-white font-medium mb-4'>
+											<p className='text-black font-medium mb-4'>
 												${product.price.toFixed(2)}
 											</p>
 											<button
 												onClick={() => addToCart(product)}
-												className='w-full bg-black hover:bg-black text-w font-semibold py-2 px-4 rounded transition-colors duration-300 
+												className='text-white w-full bg-black hover:bg-black text-w font-semibold py-2 px-4 rounded transition-colors duration-300 
 												flex items-center justify-center'
 											>
 												<ShoppingCart className='w-5 h-5 mr-2' />

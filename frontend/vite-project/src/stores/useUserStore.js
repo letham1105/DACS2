@@ -70,6 +70,18 @@ export const useUserStore = create((set, get) => ({
 			throw error;
 		}
 	},
+	editProfile: async (updatedUser) => {
+		set({ loading: true });
+		try {
+			const response = await axios.put("/auth/profile", updatedUser);
+			set({ user: response.data, loading: false });
+			toast.success("Your profile is updated!");
+		} catch (error) {
+			set({ loading: false });
+			toast.error(error.response?.data?.message || "Can not update your profile!");
+		}
+	},
+	
 }));
 
 // TODO: Implement the axios interceptors for refreshing access token
@@ -105,4 +117,5 @@ axios.interceptors.response.use(
 		}
 		return Promise.reject(error);
 	}
+	
 );

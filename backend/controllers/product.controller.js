@@ -95,7 +95,7 @@ export const getRecommendedProducts = async (req, res) => {
 	try {
 		const products = await Product.aggregate([
 			{
-				$sample: { size: 4 },
+				$sample: { size: 6 },
 			},
 			{
 				$project: {
@@ -153,3 +153,47 @@ async function updateFeaturedProductsCache() {
 		console.log("error in update cache function");
 	}
 }
+export const updateProduct = async (req, res) => {
+	try {
+		const { id } = req.params; // ID sản phẩm từ URL
+		const updateData = req.body; // Dữ liệu mới từ client
+
+		// Nếu có hình ảnh mới, cập nhật trên Cloudinary
+		if (updateData.image) {
+			const product = await Product.findById(id);
+
+			if (!product) {
+				return res.status(404).json({ message: "Product not found" });
+			}
+
+			// Xóa hình ảnh cũ trên Cloudinary nếu tồn tại
+			if (product.image) {
+				const publicId = product.image.split("/").pop().split(".")[0];
+				await cloudinary.uploader.destroy(`products/${publicId}`);
+			}
+
+			// Upload hình ảnh mới lên Cloudinary
+			const cloudinaryResponse = await cloudinary.uploader.upload(updateData.image, {
+				folder: "products",
+			});
+
+			// Cập nhật đường dẫn hình ảnh trong dữ liệu
+			updateData.image = cloudinaryResponse.secure_url;
+		}
+
+		// Cập nhật sản phẩm
+		const updatedProduct = await Product.findByIdAndUpdate(id, updateData, {
+			new: true, // Trả về sản phẩm sau khi cập nhật
+			runValidators: true, // Áp dụng các validator trong schema
+		});
+
+		if (!updatedProduct) {
+			return res.status(404).json({ message: "Product not found" });
+		}
+
+		res.json(updatedProduct);
+	} catch (error) {
+		console.log("Error in updateProduct controller", error.message);
+		res.status(500).json({ message: "Server error", error: error.message });
+	}
+};

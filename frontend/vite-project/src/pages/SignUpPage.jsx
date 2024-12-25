@@ -53,7 +53,7 @@ const SignUpPage = () => {
 									required
 									value={formData.name}
 									onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-									className='block w-full px-3 py-2 pl-10 bg-gray-100 border border-gray-300 rounded-md shadow-sm
+									className='block w-full px-3 py-2 pl-10 text-gray-900 bg-gray-100 border border-gray-300 rounded-md shadow-sm
 									 placeholder-gray-400 focus:outline-none focus:ring-black focus:border-gray-500 sm:text-sm'
 									placeholder='John Doe'
 								/>
@@ -96,7 +96,7 @@ const SignUpPage = () => {
 									required
 									value={formData.password}
 									onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-									className=' block w-full px-3 py-2 pl-10 bg-gray-100 border border-gray-300 
+									className=' block w-full px-3 py-2 pl-10  text-gray-900 bg-gray-100 border border-gray-300 
 									rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-black focus:border-gray-500 sm:text-sm'
 									placeholder='••••••••'
 								/>
@@ -117,7 +117,7 @@ const SignUpPage = () => {
 									required
 									value={formData.confirmPassword}
 									onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-									className=' block w-full px-3 py-2 pl-10 bg-gray-100 border
+									className=' block w-full px-3 py-2 pl-10  text-gray-900 bg-gray-100 border
 									 border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-black focus:border-gray-500 sm:text-sm'
 									placeholder='••••••••'
 								/>

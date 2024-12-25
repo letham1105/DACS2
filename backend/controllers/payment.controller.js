@@ -1,6 +1,8 @@
 import Coupon from "../models/coupon.model.js";
 import Order from "../models/order.model.js";
 import { stripe } from "../lib/stripe.js";
+import { sendEmail } from "../lib/nodemailer.js"; // Import hàm sendEmail
+
 
 export const createCheckoutSession = async (req, res) => {
 	try {
@@ -61,8 +63,10 @@ export const createCheckoutSession = async (req, res) => {
 					}))
 				),
 			},
+			// Yêu cầu email khách hàng trong session thanh toán
+	customer_email: req.user.email, // Hoặc bạn có thể lấy email từ req.user nếu đã có
 		});
-
+        
 		if (totalAmount >= 20000) {
 			await createNewCoupon(req.user._id);
 		}
@@ -102,10 +106,39 @@ export const checkoutSuccess = async (req, res) => {
 				})),
 				totalAmount: session.amount_total / 100, // convert from cents to dollars,
 				stripeSessionId: sessionId,
+				customerEmail: session.customer_email,
 			});
 
 			await newOrder.save();
+             // Gửi email xác nhận đơn hàng
+    //   const emailSubject = "Order Confirmation - Your Order with Us";
+    //   const emailText = `Thank you for your purchase! 
+	//   Your order ID is ${newOrder._id}. The total amount is $${newOrder.totalAmount}. We will process your order shortly.`;
+            // Gửi email xác nhận đơn hàng
+const emailSubject = "Order Confirmation - Thank You for Your Purchase!";
 
+const emailText = `
+Dear Customer,
+
+Thank you for shopping with us! 
+
+Here are the details of your order:
+-------------------------------------------------
+Order ID       : ${newOrder._id}
+Total Amount   : $${newOrder.totalAmount.toFixed(2)}
+-------------------------------------------------
+
+Your order is now being processed, and you will receive another email once it has been shipped.
+
+If you have any questions, feel free to contact our support team.
+
+Best regards,  
+Lyn Store
+Customer Support Team  
+support@Lynstore.com  
+`;
+
+      await sendEmail(newOrder.customerEmail, emailSubject, emailText); // Gửi email cho khách hàng
 			res.status(200).json({
 				success: true,
 				message: "Payment successful, order created, and coupon deactivated if used.",
@@ -132,7 +165,7 @@ async function createNewCoupon(userId) {
 
 	const newCoupon = new Coupon({
 		code: "GIFT" + Math.random().toString(36).substring(2, 8).toUpperCase(),
-		discountPercentage: 10,
+		discountPercentage: 50,
 		expirationDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
 		userId: userId,
 	});

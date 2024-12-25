@@ -12,16 +12,19 @@
 	"dependencies": {
 		"@stripe/stripe-js": "^4.3.0",
 		"axios": "^1.7.5",
+		"cloudinary-react": "^1.8.1",
 		"e-commerce-store": "file:..",
 		"framer-motion": "^11.3.30",
-		"lucide-react": "^0.435.0",
+		"lucide-react": "^0.460.0",
 		"nodemailer": "^6.9.16",
 		"react": "^18.3.1",
 		"react-confetti": "^6.1.0",
 		"react-dom": "^18.3.1",
 		"react-hot-toast": "^2.4.1",
 		"react-router-dom": "^6.26.1",
+		"react-slick": "^0.30.3",
 		"recharts": "^2.12.7",
+		"slick-carousel": "^1.8.1",
 		"zustand": "^4.5.5"
 	},
 	"devDependencies": {

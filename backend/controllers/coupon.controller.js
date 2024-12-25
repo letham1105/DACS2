@@ -22,6 +22,7 @@ export const validateCoupon = async (req, res) => {
 		if (coupon.expirationDate < new Date()) {
 			coupon.isActive = false;
 			await coupon.save();
+			console.log(`Coupon not found for code: ${userInputCode}`);
 			return res.status(404).json({ message: "Coupon expired" });
 		}
 
