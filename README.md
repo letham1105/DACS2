@@ -4,6 +4,10 @@ The DACS2 project is an e-commerce system developed using Vite + React for the f
 
 <h3>📌Homepage</h3>
 The homepage displays featured products and product categories, helping users easily search for the items they want to buy.
+<img src="https://raw.githubusercontent.com/letham1105/DACS2/main/frontend/vite-project/Screenshot%202025-02-24%20175123.png" width="900"/>
+
+
+
 
 <h3>Category Section</h3>
 <img src="https://github.com/letham1105/DACS2/blob/main/frontend/vite-project/Screenshot%202025-02-27%20220334.png?raw=true" width="1000"/>
